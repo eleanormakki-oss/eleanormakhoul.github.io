@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Manny's Math Adventure</title>
+  <link rel="icon" type="image/png" href="learnio_logo.png">
+
+  <style>
+  @font-face {
+    font-family: 'sft-ritam-sans';
+    src: url('fontform/SFT-Ritam-Sans-TRIAL-ExtraBold.woff2') format('woff2');
+    font-display: swap;
+  }
+
+  body {
+    font-family: 'sft-ritam-sans', Arial, sans-serif;
+    background: #d0ede0;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    overflow-x: hidden;
+  }
+
+  .popup {
+    background: #2e7d32;
+    color: #e8f5e9;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    display: none;
+    width: 90%;
+    max-width: 400px;
+    animation: popIn 0.5s ease;
+    text-align: center;
+  }
+
+  button {
+    background: linear-gradient(to right, #388e3c, #00695c);
+    border: none;
+    padding: 14px 28px;
+    margin: 10px;
+    border-radius: 30px;
+    font-size: 23px;
+    font-weight: bold;
+    color: #ffffff;
+    cursor: pointer;
+    box-shadow: 0px 6px 0px #004d40;
+    transition: all 0.2s ease;
+    font-family: 'sft-ritam-sans';
+  }
+
+  button:hover {
+    background: linear-gradient(to right, #00695c, #388e3c);
+  }
+
+  button:active {
+    transform: translateY(4px);
+    box-shadow: 0px 2px 0px #004d40;
+  }
+
+  .video-container {
+    margin-top: 40px;
+    display: none;
+    text-align: center;
+  }
+
+  .video-container video {
+    max-width: 90%;
+    height: auto;
+  }
+
+  .choices {
+    margin-top: 20px;
+    display: none;
+  }
+
+  .congrats {
+    display: none;
+    font-size: 28px;
+    margin-top: 20px;
+    color: #1b5e20;
+    font-weight: bold;
+  }
+
+  }
+  </style>
+</head>
+<body>
+
+<div id="popup1" class="popup">
+  <p>Help Manny the Elephant leave the jungle by practicing your multiplication.</p>
+  <button onclick="startVideo()">Play</button>
+</div>
+
+<div class="video-container" id="videoContainer">
+  <video id="mannyVideo" width="600" controls>
+    <source id="videoSource" src="jungle-intro.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+<div id="popup2" class="popup">
+  <p>Help Manny the Elephant jump over that huge hole. What's 3×3?</p>
+  <div class="choices">
+    <button onclick="checkAnswer(6)">6</button>
+    <button onclick="checkAnswer(9)">9</button>
+    <button onclick="checkAnswer(12)">12</button>
+  </div>
+</div>
+
+<div id="congrats" class="congrats">Good job!</div>
+
+<script>
+  let firstVideoDone = false;
+
+  window.onload = () => {
+    document.getElementById('popup1').style.display = 'block';
+  };
+
+  function startVideo() {
+    document.getElementById('popup1').style.display = 'none';
+    const video = document.getElementById('mannyVideo');
+    document.getElementById('videoContainer').style.display = 'block';
+    video.onended = handleVideoEnd;
+    video.play();
+  }
+
+  function handleVideoEnd() {
+    if (!firstVideoDone) {
+      showQuestion();
+    } else {
+    }
+  }
+
+  function showQuestion() {
+    document.getElementById('popup2').style.display = 'block';
+    document.querySelector('.choices').style.display = 'block';
+  }
+
+  function checkAnswer(value) {
+    if (value === 9) {
+      document.getElementById('popup2').style.display = 'none';
+      document.getElementById('congrats').style.display = 'block';
+
+      setTimeout(() => {
+        document.getElementById('congrats').style.display = 'none';
+        const video = document.getElementById('mannyVideo');
+        const source = document.getElementById('videoSource');
+        source.src = 'manny-jump.mp4';
+        video.load();
+        video.play();
+        firstVideoDone = true;
+      }, 1500);
+    } else {
+      alert("Oops! Try again.");
+    }
+  }
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>LEARN.IO | Play. Learn. Grow.</title>
+  <link rel="icon" type="image/png" href="learnio_logo.png"/>
+  <link rel="stylesheet" href="account.css">
+</head>
+
+<body>
+  <div class="header">
+    <div class="logo-container">
+      <img src="learn-io.png" alt="LEARN.IO">
+    </div>
+    <nav class="nav-menu">
+      <ul>
+        <li><a href="#">Watch</a></li>
+        <li class="dropdown">
+          <a href="#">Menu &#9662;</a>
+          <ul class="dropdown-content">
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Parent Center</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#" onclick="openLogoutModal(); return false;">Log Out</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <section class="welcome-banner">
+    <h1>Welcome, Dr. Oggs' Class!</h1>
+    <p>Here’s what you’ve been working on:</p>
+  </section>
+
+  <section class="progress-section">
+    <div class="progress-card math">
+      <h2>Math</h2>
+      <p>78% Mastered</p>
+      <div class="progress-bar"><div class="fill" style="width: 78%;"></div></div>
+    </div>
+
+    <div class="progress-card reading">
+      <h2>Reading</h2>
+      <p>65% Mastered</p>
+      <div class="progress-bar"><div class="fill" style="width: 65%;"></div></div>
+    </div>
+
+    <div class="progress-card science">
+      <h2>Science</h2>
+      <p>84% Mastered</p>
+      <div class="progress-bar"><div class="fill" style="width: 84%;"></div></div>
+    </div>
+  </section>
+
+  <section class="lessons-section">
+    <h2>Today's Tailored Lessons</h2>
+    <div class="lesson-cards">
+      <div class="lesson-card" onclick="goToMathGame()">
+        <h3>Math Adventure</h3>
+        <p>Practice multiplication in a jungle maze!</p>
+      </div>
+
+      <div class="lesson-card">
+        <h3>Story Explorer</h3>
+        <p>Read, discover, and answer fun questions!</p>
+      </div>
+
+      <div class="lesson-card">
+        <h3>Science Lab</h3>
+        <p>Mix virtual potions while learning reactions!</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="login-loading" id="loading-screen" style="display: none;">
+    <h2>Loading Your Math Adventure...</h2>
+    <div class="spinner"></div>
+  </div>
+
+  <section class="extras-section">
+    <div class="daily-challenge">
+      <h2>Daily Challenge</h2>
+      <div class="challenge-card">
+        <h3>Complete 1 Lesson Today</h3>
+        <p>Earn <strong>+10 Brain Points</strong> and unlock a fun mini game!</p>
+        <button>Start Now</button>
+      </div>
+    </div>
+
+    <div class="streak-tracker">
+      <h2>Learning Streak</h2>
+      <div class="streak-info">
+        <p><strong>Dr. Oggs' Class:</strong> 5-Day Streak</p>
+        <div class="flame-icon">🔥🔥🔥🔥🔥</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>TM & © 2025 Learn.io Co. All rights reserved.</p>
+    <div class="links">
+      <a href="#">Terms & Conditions</a> |
+      <a href="#">Privacy Policy</a> |
+      <a href="#">Customer Support</a>
+    </div>
+  </footer>
+
+  <script>
+  function goToMathGame() {
+    document.body.innerHTML = `
+      <div class="login-loading" id="loading-screen">
+        <h2>Loading Your Math Adventure...</h2>
+        <div class="spinner"></div>
+      </div>
+    `;
+
+      setTimeout(() => {
+      window.location.href = 'math-game.html';
+    }, 2000);
+  }
+
+
+    function openLogoutModal() {
+      document.getElementById('logoutModal').style.display = 'block';
+    }
+
+    function closeModal() {
+      document.getElementById('logoutModal').style.display = 'none';
+      document.getElementById('logoutPassword').value = "";
+    }
+
+    function cancelLogout() {
+      closeModal();
+    }
+
+    function confirmLogout() {
+      const passwordInput = document.getElementById('logoutPassword').value;
+      if (passwordInput === "password123") {
+        window.location.href = "login.html";
+      } else {
+        alert("Incorrect password. Try again.");
+      }
+    }
+
+    window.onclick = function(event) {
+      const modal = document.getElementById('logoutModal');
+      if (event.target === modal) {
+        closeModal();
+      }
+    }
+  </script>
+
+  <div id="logoutModal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" onclick="closeModal()">&times;</span>
+      <h2>Confirm Logout</h2>
+      <p>Are you sure you want to log out?</p>
+      <input type="password" id="logoutPassword" placeholder="Enter your password">
+      <div class="modal-buttons">
+        <button onclick="cancelLogout()">Cancel</button>
+        <button onclick="confirmLogout()">Log Out</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
